@@ -7,8 +7,10 @@
 <% if enhanced_cart.length == 0 %>
   <div class="alert alert-warning" role="alert">
     Oh no! The cart is Empty! Please add items to your cart before checking out!
+    <%= link_to 'Back to Homepage', :root %>
   </div>
-  <% else %>
+  
+<% else %>
   <div class="panel panel-default items">
     <table class="table table-bordered">
       <thead>
@@ -53,6 +55,6 @@
       <% end %>
     </div>
   </div>
-  <% end %>
+<% end %>
 
 </section>
