@@ -4,9 +4,9 @@ class Admin::CategoriesController < ApplicationController
     @categories = Category.order(id: :desc).all
   end
 
-  # def new
-  #   @product = Product.new
-  # end
+  def new
+    @categories = Category.new
+  end
 
   # def create
   #   @product = Product.new(product_params)
