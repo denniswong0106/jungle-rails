@@ -1,6 +1,14 @@
-<h1>Hello, admin!</h1>
-<div>
-  <h2>You have <%= @product_count %> products in your store</h2>
-  <h2>You have <%= @category_count %> categories of products in your store</h2>
-  <%= link_to 'Your Products Page',  [:admin, :products] %>
-</div>
+
+<section class=admin-dashboard>
+  <header class="page-header">
+    <h1>Admin &raquo; Dashboard</h1>
+    <p class=products-page><%= link_to 'Your Products',  [:admin, :products] %><p>
+  </header>
+ 
+  <div class="well">
+    <h2 class="count">Current number of Products in your store: <%= @product_count %><h2>
+    <h2 class="count">Current number of Categories in your store: <%= @category_count %></h2>
+  </div>
+  
+
+</section class=admin-dashboard>
