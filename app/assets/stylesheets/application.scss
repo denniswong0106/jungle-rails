@@ -16,3 +16,13 @@ body {
 form.button_to {
   display: inline;
 }
+
+.navbar-nav {
+  li {
+    span.user-display {
+      display: block;
+      padding-top: 15px;
+      padding-bottom: 15px;
+    }
+  }
+}
