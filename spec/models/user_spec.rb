@@ -90,9 +90,6 @@ RSpec.describe User, type: :model do
       end
     end
 
-  end
-
-  describe "validate" do
     context "password length is greater than 5" do
       before do
         @user = User.create(name: "Example User", email: "user@example.com",
@@ -102,9 +99,7 @@ RSpec.describe User, type: :model do
         expect(@user.save).to be true
       end
     end
-  end
 
-  describe "validate" do
     context "password length is 5" do
       before do
         @user = User.create(name: "Example User", email: "user@example.com",
@@ -114,9 +109,7 @@ RSpec.describe User, type: :model do
         expect(@user.save).to be true
       end
     end
-  end
 
-  describe "validate" do
     context "password length is less than 5" do
       before do
         @user = User.create(name: "Example User", email: "user@example.com",
@@ -127,6 +120,51 @@ RSpec.describe User, type: :model do
       end
     end
   end
+
+  describe ".authenticate_with_credentials" do
+    before do
+      @user = User.create(name: "Example User", email: "user@example.com",
+      password: "foobar", password_confirmation: "foobar")
+    end
+    context "given correct credentials" do
+      it "return an corresponding instance of user" do
+        expect(User.authenticate_with_credentials("user@example.com", "foobar")).to eq(@user)
+      end
+    end
+
+    context "given email with spaces in front" do
+      it "return nil" do
+        expect(User.authenticate_with_credentials("    user@example.com", "foobar")).to eq(nil)
+      end
+    end
+
+    context "given email with spaces in behind" do
+      it "return nil" do
+        expect(User.authenticate_with_credentials("user@example.com    ", "foobar")).to eq(nil)
+      end
+    end
+
+    context "given email with different case" do
+      it "return an corresponding instance of user" do
+        expect(User.authenticate_with_credentials("USER@EXAMPLE.COM", "foobar")).to eq(@user)
+      end
+    end
+
+    context "given wrong email" do
+      it "return nil" do
+        expect(User.authenticate_with_credentials("user@different.com", "foobar")).to eq(nil)
+      end
+    end
+
+    context "given wrong password, for correct email" do
+      it "return nil" do
+        expect(User.authenticate_with_credentials("user@example.com", "wrongpass")).to be false
+      end
+    end
+
+  end
 end
+
+
 
 

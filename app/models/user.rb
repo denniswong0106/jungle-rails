@@ -8,6 +8,6 @@ class User < ActiveRecord::Base
   validates_uniqueness_of :email, :case_sensitive => false
 
   def self.authenticate_with_credentials(email, password)
-    User.find_by(email: email).try(:authenticate, password)
+    User.where('lower(email) = ?', email.downcase).first.try(:authenticate, password)
   end
 end
