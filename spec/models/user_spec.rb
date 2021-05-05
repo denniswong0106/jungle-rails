@@ -90,5 +90,43 @@ RSpec.describe User, type: :model do
       end
     end
 
-  end 
+  end
+
+  describe "validate" do
+    context "password length is greater than 5" do
+      before do
+        @user = User.create(name: "Example User", email: "user@example.com",
+        password: "foobar", password_confirmation: "foobar")
+      end
+      it "should save" do
+        expect(@user.save).to be true
+      end
+    end
+  end
+
+  describe "validate" do
+    context "password length is 5" do
+      before do
+        @user = User.create(name: "Example User", email: "user@example.com",
+        password: "fooba", password_confirmation: "fooba")
+      end
+      it "should save" do
+        expect(@user.save).to be true
+      end
+    end
+  end
+
+  describe "validate" do
+    context "password length is less than 5" do
+      before do
+        @user = User.create(name: "Example User", email: "user@example.com",
+        password: "foob", password_confirmation: "foob")
+      end
+      it "should not save" do
+        expect(@user.save).to be false
+      end
+    end
+  end
 end
+
+
